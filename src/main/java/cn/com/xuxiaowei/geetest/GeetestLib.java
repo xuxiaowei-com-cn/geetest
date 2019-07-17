@@ -142,6 +142,14 @@ public class GeetestLib {
         return responseJson;
     }
 
+    /**
+     * 极验验证，boolean
+     *
+     * @param request 请求
+     * @param param   参数
+     * @return 返回极验验证结果，boolean
+     * @throws UnsupportedEncodingException 转 URLEncoder 异常
+     */
     public boolean verify(HttpServletRequest request, VerifyParam param) throws UnsupportedEncodingException {
         JSONObject jsonObject = verifyJson(request, param);
         Object status = jsonObject.get("status");
@@ -149,10 +157,11 @@ public class GeetestLib {
     }
 
     /**
-     * 极验验证
+     * 极验验证，JSONObject
      *
+     * @param param   参数
      * @param request 请求
-     * @return 返回验证结果
+     * @return 返回极验验证结果
      * @throws UnsupportedEncodingException 转 URLEncoder 异常
      */
     public JSONObject verifyJson(HttpServletRequest request, VerifyParam param) throws UnsupportedEncodingException {
