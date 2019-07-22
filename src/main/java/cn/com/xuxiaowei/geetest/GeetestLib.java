@@ -48,11 +48,15 @@ public class GeetestLib {
 
     /**
      * 极验验证API服务状态Session Key
+     *
+     * <code>String referer = request.getHeader("Referer");</code>
      */
     private final String GT_SERVER_STATUS_SESSION_KEY = "gt_server_status";
 
     /**
      * 放入 Session 中的用户标识
+     *
+     * <code>String referer = request.getHeader("Referer");</code>
      */
     private final String GEETEST_USER_ID = "geetest_user_id";
 
@@ -133,11 +137,13 @@ public class GeetestLib {
 
         HttpSession session = request.getSession();
 
+        String referer = request.getHeader("Referer");
+
         // 将服务器状态设置到 session 中
-        session.setAttribute(GT_SERVER_STATUS_SESSION_KEY, gtServerStatus);
+        session.setAttribute(referer + ":" + GT_SERVER_STATUS_SESSION_KEY, gtServerStatus);
 
         // 将 userid 设置到 session 中
-        session.setAttribute(GEETEST_USER_ID, geetestParam.getUserId());
+        session.setAttribute(referer + ":" + GEETEST_USER_ID, geetestParam.getUserId());
 
         return responseJson;
     }
@@ -172,11 +178,13 @@ public class GeetestLib {
 
         HttpSession session = request.getSession();
 
+        String referer = request.getHeader("Referer");
+
         //从session中获取gt-server状态
-        int gtServerStatusCode = (Integer) session.getAttribute(GT_SERVER_STATUS_SESSION_KEY);
+        int gtServerStatusCode = (Integer) session.getAttribute(referer + ":" + GT_SERVER_STATUS_SESSION_KEY);
 
         //从 session 中获取 userid
-        String userid = (String) session.getAttribute(GEETEST_USER_ID);
+        String userid = (String) session.getAttribute(referer + ":" + GEETEST_USER_ID);
 
         param.setUserId(userid);
 
